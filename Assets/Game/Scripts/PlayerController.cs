@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController _controller;
+    private NavMeshAgent _agent;
 
     [SerializeField]
     private float _speed = 3.5f;
@@ -14,13 +15,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _controller = GetComponent<CharacterController>();
+        _agent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         Movement();
+        
     }
 
     private void Movement()
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour
         velocity.y -= _gravity;
 
         velocity = transform.TransformDirection(velocity);
-        _controller.Move(velocity * Time.deltaTime);
+        _agent.Move(velocity * Time.deltaTime);
     }
 
     
